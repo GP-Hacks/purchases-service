@@ -75,14 +75,14 @@ sudo docker stop "$CONTAINER_NAME" 2>/dev/null || echo "Container was not runnin
 sudo docker rm "$CONTAINER_NAME" 2>/dev/null || echo "Container was not found"
 
 echo "🔗 Finding existing network..."
-NETWORK_NAME=$(sudo docker network ls --format "{{.Name}}" | grep "${PROJECT_NAME}-network" | head -1)
-if [ -z "$NETWORK_NAME" ]; then
-    echo "⚠️  No existing network found, creating new one..."
-    NETWORK_NAME="${PROJECT_NAME}-network-$ENVIRONMENT"
-    sudo docker network create "$NETWORK_NAME"
-else
-    echo "📡 Using existing network: $NETWORK_NAME"
-fi
+NETWORK_NAME="kdt"
+# if [ -z "$NETWORK_NAME" ]; then
+#     echo "⚠️  No existing network found, creating new one..."
+#     NETWORK_NAME="${PROJECT_NAME}-network-$ENVIRONMENT"
+#     sudo docker network create "$NETWORK_NAME"
+# else
+#     echo "📡 Using existing network: $NETWORK_NAME"
+# fi
 
 echo "▶️  Starting new application container..."
 echo "Command: docker run -d --name $CONTAINER_NAME --network $NETWORK_NAME --env-file $ENV_FILE -p $PORT:8080 --restart unless-stopped $IMAGE"
