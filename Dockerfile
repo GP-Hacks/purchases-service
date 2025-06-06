@@ -1,19 +1,19 @@
-FROM golang:1.23-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
-COPY purchases/go.mod ./
+COPY go.mod ./
 RUN go mod download
 
 COPY . .
 
-WORKDIR /app/purchases/cmd/purchases
+WORKDIR /app/cmd/purchases
 RUN go build -o purchases_service
 
 FROM alpine:latest
 WORKDIR /root/
 
-COPY --from=builder /app/purchases/cmd/purchases/purchases_service .
+COPY --from=builder /app/cmd/purchases/purchases_service .
 
 EXPOSE 8080
 
