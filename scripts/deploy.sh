@@ -16,7 +16,7 @@ if [[ -z "$ENVIRONMENT" || -z "$IMAGE" || -z "$CONTAINER_NAME" || -z "$PORT" || 
     exit 1
 fi
 
-DEPLOY_PATH="/opt/apps/$ENVIRONMENT"
+DEPLOY_PATH="/opt/apps/$CONTAINER_NAME/$ENVIRONMENT"
 ENV_FILE="$DEPLOY_PATH/.env"
 
 echo "🚀 Starting app deployment..."
